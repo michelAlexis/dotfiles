@@ -5,11 +5,8 @@ return {
     name = "catppuccin",
     lazy = false,
     priority = 1000,
-    opts = {
-      flavour = "frappe",
-    },
     config = function ()
-      vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme 'catppuccin-frappe'
     end
   },
 }
