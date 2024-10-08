@@ -115,7 +115,7 @@ wezterm.on('gui-startup', function()
   window:gui_window():maximize()
 end)
 
-wezterm.on("update-status", function(window, pane)
+wezterm.on('update-status', function(window, pane)
   local basename = function(s)
     -- Nothing a little regex can't fix
     return string.gsub(s, '(.*[/\\])(.*)', '%2')
@@ -126,7 +126,8 @@ wezterm.on("update-status", function(window, pane)
   if cwd then
     if type(cwd) == 'userdata' then
       -- Wezterm introduced the URL object in 20240127-113634-bbcac864
-      cwd = basename(cwd.file_path)
+      -- cwd = basename(cwd.file_path)
+      cwd = cwd.file_path
     else
       -- 20230712-072601-f4abf8fd or earlier version
       cwd = basename(cwd)
