@@ -87,10 +87,10 @@ config.keys = {
     key = 'UpArrow',
     action = wezterm.action.AdjustPaneSize { 'Up', 5 },
   },
-  -- past
+  -- copy-past
   {
     mods = 'CTRL',
-    key = 'V',
+    key = 'v',
     action = act.PasteFrom 'Clipboard',
   },
 }

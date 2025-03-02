@@ -6,7 +6,7 @@ vim.cmd("set shiftwidth=2")
 -- Set lead to space
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.o.guicursor = 'n-v-c-i:block'
+vim.o.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20'
 
 
 -- [[ Setting options ]]

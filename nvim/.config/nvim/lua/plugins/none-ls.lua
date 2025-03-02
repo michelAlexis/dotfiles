@@ -7,7 +7,7 @@ return {
         -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
         nls.builtins.formatting.stylua,
         nls.builtins.formatting.prettier,
-        nls.builtins.diagnostics.eslint_d,
+        -- nls.builtins.diagnostics.eslint_d,
       },
     })
   end,
