@@ -6,11 +6,16 @@
     // "network",
     "pulseaudio",
     "battery",
-    "clock"
+    "clock#calendar",
+    "clock#time"
   ],
-  "clock": {
-    "format": "<span foreground='#f5c2e7'>   </span>{:%d/%m %H:%M}",
+  "clock#calendar": {
+    "format": "📅  {:%d/%m}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "clock#time": {
+    "format": "  {:%H:%M}",
+    "tooltip": false,
   },
   "battery": {
     "states": {

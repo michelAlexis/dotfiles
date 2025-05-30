@@ -79,6 +79,10 @@ button:hover {
     color: @maroon;
     border-bottom: 2px solid @maroon;
 }
+#clock.calendar {
+    color: @mauve;
+    border-bottom: 2px solid @mauve;
+}
 
 #clock.date {
     color: @mauve;
