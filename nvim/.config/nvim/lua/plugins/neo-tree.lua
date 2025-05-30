@@ -17,7 +17,7 @@ return {
       desc = "File [E]xplorer"
     },
   },
-  config = {
+  opts = {
     filesystem = {
       filtered_items = {
         visible = true,
