@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# Hardcoded sink names
+# pactl -f json list sinks | jq -r '.[] | "\(.description): \(.name)"'
+speakerSinkName="alsa_output.usb-Focusrite_Scarlett_Solo_USB_Y79TE224A7D9AF-00.HiFi__Line1__sink"
+headphonesSinkName="alsa_output.usb-Plantronics_Plantronics_RIG_Surround_46CB54B756C89742950D042B4761F52F-00.analog-stereo"
+
+# Hardcoded display options (must match exactly in the case)
+options="Speakers\nHeadphones"
+selection=$(printf "$options" | wofi --dmenu -p "Select Output:")
+
+if [ -z "$selection" ]; then
+    exit
+fi
+
+# Set sink name based on selection
+case "$selection" in
+    "Speakers")
+        sink_name="$speakerSinkName"
+        ;;
+    "Headphones")
+        sink_name="$headphonesSinkName"
+        ;;
+    *)
+        notify-send "Unknown selection: $selection"
+        exit 1
+        ;;
+esac
+
+# Switch sink and move active audio
+if [ -n "$sink_name" ]; then
+    pactl set-default-sink "$sink_name"
+    for input in $(pactl list short sink-inputs | cut -f1); do
+        pactl move-sink-input "$input" "$sink_name"
+    done
+    notify-send "Audio switched to: $selection"
+else
+    notify-send "Failed to switch sink"
+    exit 1
+fi
