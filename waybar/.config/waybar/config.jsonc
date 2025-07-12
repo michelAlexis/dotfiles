@@ -1,14 +1,21 @@
 {
   "position": "top",
   "modules-left": ["hyprland/workspaces"],
-  "modules-center": ["hyprland/window"],
+  "modules-center": [
+    // "hyprland/window"
+    "clock#date"
+  ],
   "modules-right": [
     // "network",
     "pulseaudio",
     "battery",
-    "clock#calendar",
+    // "clock#calendar",
     "clock#time"
   ],
+  "clock#date": {
+    "format": "{:%d %B %Y}",
+    "tooltip": false
+  },
   "clock#calendar": {
     "format": "{:%d/%m}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
