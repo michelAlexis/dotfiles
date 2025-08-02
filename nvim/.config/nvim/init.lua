@@ -1,4 +1,5 @@
 require('vim-options')
+require('keybinds')
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim

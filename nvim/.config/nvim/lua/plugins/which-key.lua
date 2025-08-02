@@ -13,6 +13,8 @@ return {
       { '<leader>g_', hidden = true },
       { '<leader>h', group = 'More git' },
       { '<leader>h_', hidden = true },
+      { '<leader>l', group = 'Quickfix [L]ist' },
+      { '<leader>l_', hidden = true },
       { '<leader>r', group = '[R]ename' },
       { '<leader>r_', hidden = true },
       { '<leader>s', group = '[S]earch' },
