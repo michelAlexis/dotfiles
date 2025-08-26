@@ -28,7 +28,7 @@ local servers = {
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(event)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -40,7 +40,7 @@ local on_attach = function(_, bufnr)
       desc = "LSP: " .. desc
     end
 
-    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+    vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
   end
 
   nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
@@ -65,13 +65,12 @@ local on_attach = function(_, bufnr)
   nmap("<leader>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, "[W]orkspace [L]ist Folders")
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-    vim.lsp.buf.format()
-  end, { desc = "Format current buffer with LSP" })
 end
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+  callback = on_attach
+})
 
 return {
   {
@@ -81,6 +80,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
+      "neovim/nvim-lspconfig",
       -- { 'hrsh7th/cmp_nvim_lsp', lazy = false, config = true },
     },
     config = function()
@@ -88,40 +88,25 @@ return {
       masonconfig.setup({
         ensure_installed = vim.tbl_keys(servers),
       })
-      masonconfig.setup_handlers({
-        function(server_name)
-          -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-          local capabilities = vim.lsp.protocol.make_client_capabilities()
-          capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-          require("lspconfig")[server_name].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = servers[server_name],
-            filetypes = (servers[server_name] or {}).filetypes,
-          })
-        end,
-      })
-    end,
-  },
-  {
-    -- lsp configuration & plugins
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      -- {
-      -- {
-      --
-      --     'L3MON4D3/LuaSnip'
-      -- },
-      --
-      --     'L3MON4D3/LuaSnip'
-      -- },
-      -- automatically install lsps to stdpath for neovim
-      -- 'williamboman/mason.nvim',
 
-      -- useful status updates for lsp
-      -- note: `opts = {}` is the same as calling `require('fidget').setup({})`
-      -- { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-    },
+      for server_name, config in pairs(servers) do
+        vim.lsp.config(server_name, config)
+      end
+
+      -- masonconfig.setup_handlers({
+      --   function(server_name)
+      --     -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+      --     local capabilities = vim.lsp.protocol.make_client_capabilities()
+      --     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+      --     require("lspconfig")[server_name].setup({
+      --       capabilities = capabilities,
+      --       on_attach = on_attach,
+      --       settings = servers[server_name],
+      --       filetypes = (servers[server_name] or {}).filetypes,
+      --     })
+      --   end,
+      -- })
+    end,
   },
   -- additional lua configuration, makes nvim stuff amazing!
   { "folke/neodev.nvim", opts = {} },
