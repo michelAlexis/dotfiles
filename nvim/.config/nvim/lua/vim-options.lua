@@ -1,8 +1,3 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
-
 -- Set lead to space
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -13,14 +8,19 @@ vim.o.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20'
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
--- Set highlight on search
---vim.o.hlsearch = false
-
--- Make line numbers default
 vim.wo.number = true
-
--- Make line numbers relativs
 vim.wo.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.wrap = true
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 10
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.autoindent = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -39,16 +39,19 @@ vim.o.undofile = true
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
+vim.opt.colorcolumn = "100"
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 50
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menuone,noinsert,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true

@@ -43,3 +43,9 @@ vim.keymap.set("n", "<leader>ll", function()
 end, { desc = "Toggle Quickfix List" })
 vim.keymap.set("n", "<leader>ln", "cnext", { desc = "Quickfix: Next" })
 vim.keymap.set("n", "<leader>lp", "cprev", { desc = "Quickfix: Previous" })
+
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
+vim.keymap.set({"n", "v"}, "<leader>x", '"_d', { desc = "Delete without yanking" })
+
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })

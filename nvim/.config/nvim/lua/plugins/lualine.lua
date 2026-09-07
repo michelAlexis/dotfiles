@@ -1,6 +1,7 @@
 return {
   -- set lualine as statusline
   'nvim-lualine/lualine.nvim',
+  enabled = false,
   -- see `:help lualine.txt`
   opts = {
     options = {
